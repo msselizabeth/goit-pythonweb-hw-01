@@ -1,0 +1,18 @@
+[project]
+name = "goit-pythonweb-hw-01"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Yelyzaveta Sheremet",email = "elizabethsheremet@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "goit_pythonweb_hw_01", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
