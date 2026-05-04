@@ -1,4 +1,5 @@
 import logging
+from typing import List
 from abc import ABC, abstractmethod
 
 # Setup logging
@@ -7,54 +8,55 @@ logger = logging.getLogger(__name__)
 
 
 class Book:
-    def __init__(self, title, author, year):
+    def __init__(self, title: str, author: str, year: str):
         self.title = title
         self.author = author
         self.year = year
 
-
+# Absract Library Class
 class LibraryInterface(ABC):
     @abstractmethod
-    def add_book(self, book):
+    def add_book(self, book: Book) -> None:
         pass
 
     @abstractmethod
-    def remove_book(self, title):
+    def remove_book(self, title: str) -> None:
         pass
 
     @abstractmethod
-    def show_books(self):
+    def show_books(self) -> List[Book]:
         pass
 
-
+# Library Class
 class Library(LibraryInterface):
     def __init__(self):
-        self.books = []
+        self.books: List[Book] = []
 
-    def add_book(self, book):
+    def add_book(self, book: Book) -> None:
         self.books.append(book)  # add the book to the list of Library intance
 
-    def remove_book(self, title):
+    def remove_book(self, title: str) -> None:
         for book in self.books:
             if book.title == title:
                 self.books.remove(book)
+                break
 
-    def show_books(self):
+    def show_books(self) -> List[Book]:
         return self.books
 
 
 class LibraryManager:
-    def __init__(self, library):
+    def __init__(self, library: LibraryInterface):
         self.library = library
 
-    def add_book(self, title, author, year):
+    def add_book(self, title: str, author: str, year: str) -> None:
         new_book = Book(title, author, year)
         self.library.add_book(new_book)
 
-    def remove_book(self, title):
+    def remove_book(self, title: str) -> None:
         self.library.remove_book(title)
 
-    def show_books(self):
+    def show_books(self) -> None:
         books = self.library.show_books()
         # Check if ther is any books to show
         if not books:
