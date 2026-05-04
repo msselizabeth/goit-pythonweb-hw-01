@@ -2,7 +2,10 @@ import logging
 from abc import ABC, abstractmethod
 
 # Setup logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s" 
+)
 logger = logging.getLogger(__name__)
 
 
