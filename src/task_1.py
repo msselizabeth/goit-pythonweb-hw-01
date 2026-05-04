@@ -2,10 +2,7 @@ import logging
 from abc import ABC, abstractmethod
 
 # Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(levelname)s: %(message)s" 
-)
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -17,48 +14,48 @@ class Vehicle(ABC):
         self.region = region
 
     @abstractmethod
-    def start_engine(self):
+    def start_engine(self) -> None:
         pass
 
 
 # Concrete classes
 class Car(Vehicle):
 
-    def start_engine(self):
-        logger.info(f"{self.make} {self.model}: Engine is launched.")
+    def start_engine(self) -> None:
+        logger.info(f"{self.make} {self.model} ({self.region}): Engine is launched.")
 
 
 class Motorcycle(Vehicle):
 
-    def start_engine(self):
-        logger.info(f"{self.make} {self.model}: Motor is launched.")
+    def start_engine(self) -> None:
+        logger.info(f"{self.make} {self.model} ({self.region}): Motor is launched.")
 
 
 # Abstarct Factory
 class VehicleFactory(ABC):
     @abstractmethod
-    def create_car(self, make, model, region):
+    def create_car(self, make: str, model: str) -> Car:
         pass
 
     @abstractmethod
-    def create_motorcycle(self, make, model, region):
+    def create_motorcycle(self, make: str, model: str) -> Motorcycle:
         pass
 
 
 # Concrete factories
 class USVehicleFactory(VehicleFactory):
-    def create_car(self, make, model):
+    def create_car(self, make: str, model: str) -> Car:
         return Car(make, model, "US Spec")
 
-    def create_motorcycle(self, make, model):
+    def create_motorcycle(self, make: str, model: str)-> Motorcycle:
         return Motorcycle(make, model, "US Spec")
 
 
 class EUVehicleFactory(VehicleFactory):
-    def create_car(self, make, model):
+    def create_car(self, make: str, model: str) -> Car:
         return Car(make, model, "EU Spec")
 
-    def create_motorcycle(self, make, model):
+    def create_motorcycle(self, make: str, model: str) -> Motorcycle:
         return Motorcycle(make, model, "EU Spec")
 
 
