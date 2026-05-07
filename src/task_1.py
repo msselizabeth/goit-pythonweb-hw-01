@@ -6,9 +6,9 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 
-# Abstarct Vehicle
+# Abstract Vehicle
 class Vehicle(ABC):
-    def __init__(self, make: str, model: str, region: str):
+    def __init__(self, make: str, model: str, region: str) -> None:
         self.make = make
         self.model = model
         self.region = region
@@ -20,18 +20,16 @@ class Vehicle(ABC):
 
 # Concrete classes
 class Car(Vehicle):
-
     def start_engine(self) -> None:
         logger.info(f"{self.make} {self.model} ({self.region}): Engine is launched.")
 
 
 class Motorcycle(Vehicle):
-
     def start_engine(self) -> None:
         logger.info(f"{self.make} {self.model} ({self.region}): Motor is launched.")
 
 
-# Abstarct Factory
+# Abstract Vehicle Factory
 class VehicleFactory(ABC):
     @abstractmethod
     def create_car(self, make: str, model: str) -> Car:
@@ -47,7 +45,7 @@ class USVehicleFactory(VehicleFactory):
     def create_car(self, make: str, model: str) -> Car:
         return Car(make, model, "US Spec")
 
-    def create_motorcycle(self, make: str, model: str)-> Motorcycle:
+    def create_motorcycle(self, make: str, model: str) -> Motorcycle:
         return Motorcycle(make, model, "US Spec")
 
 

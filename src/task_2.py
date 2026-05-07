@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class Book:
-    def __init__(self, title: str, author: str, year: str):
+    def __init__(self, title: str, author: str, year: str) -> None:
         self.title = title
         self.author = author
         self.year = year
@@ -29,11 +29,11 @@ class LibraryInterface(ABC):
 
 # Library Class
 class Library(LibraryInterface):
-    def __init__(self):
+    def __init__(self) -> None:
         self.books: List[Book] = []
 
     def add_book(self, book: Book) -> None:
-        self.books.append(book)  # add the book to the list of Library intance
+        self.books.append(book) 
 
     def remove_book(self, title: str) -> None:
         for book in self.books:
@@ -46,7 +46,7 @@ class Library(LibraryInterface):
 
 
 class LibraryManager:
-    def __init__(self, library: LibraryInterface):
+    def __init__(self, library: LibraryInterface) -> None:
         self.library = library
 
     def add_book(self, title: str, author: str, year: str) -> None:
@@ -66,7 +66,7 @@ class LibraryManager:
             logger.info(f"Title: {b.title}. Author: {b.author}. Year: {b.year}.")
 
 
-def main():
+def main() -> None:
     library = Library()
     manager = LibraryManager(library)
 
